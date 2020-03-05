@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const productArray = require("./model/products");
 const app = express();
 
+require('dotenv').config({path:"./config/keys.env"})
 
 
 app.engine("handlebars", exphdbs());
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use(express.static("public"));
-
+//home routes
 app.get("/", (req, res) => {
 
     res.render("home", {
@@ -95,7 +96,7 @@ app.post("/login", (req, res) => {
 
 
 
-const port = 3000;
-app.listen(port, () => {
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
     console.log(`The web server is created at the port ${port}`);
 })
